@@ -177,11 +177,10 @@ export default function Page() {
 
             <LetterBoard letters={letters} requiredLetter={requiredLetter} onSelectRequired={selectRequiredLetter} />
 
-            <div className="mt-2 text-center text-sm font-medium text-slate-700">
-              {requiredLetter ? `Letra obrigatória: ${requiredLetter}` : 'Selecione a letra obrigatória.'}
-            </div>
 
             <RequiredLetterSelector letters={letters} requiredLetter={requiredLetter} onSelect={selectRequiredLetter} />
+            
+            
 
             <VirtualKeyboard
               letters={letters}

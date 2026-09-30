@@ -41,7 +41,7 @@ export function VirtualKeyboard({
                     'flex h-11 w-9 items-center justify-center rounded-xl border text-sm font-semibold transition-all duration-150 sm:w-11',
                     isSelected
                       ? 'border-teal-300 bg-teal-100 text-teal-900'
-                      : 'border-stone-200 bg-white text-slate-700 hover:-translate-y-0.5 hover:border-amber-300 hover:bg-amber-50',
+                      : 'border-stone-200 bg-white text-slate-700 hover:-translate-y-0.5',
                     disabled ? 'cursor-not-allowed opacity-55' : '',
                   ].join(' ')}
                   aria-label={letter}
