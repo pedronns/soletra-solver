@@ -227,134 +227,144 @@ export default function Page() {
 
   return (
     <main className='min-h-screen bg-[#f8f6f1] text-slate-800'>
-      <div className='mx-auto max-w-5xl px-4 pb-12 pt-8 sm:px-6 lg:px-8'>
+      <div className='mx-auto max-w-[1440px] px-4 pb-12 pt-8 sm:px-6 lg:px-8'>
         <header className='mb-8 flex flex-col gap-2 text-center sm:text-left'>
           <h1 className='text-3xl font-black tracking-tight text-slate-900 sm:text-4xl'>
             Soletra Solver
           </h1>
+
           <p className='text-base text-stone-600'>
             Encontre palavras possíveis com as letras do dia.
           </p>
         </header>
 
-        <section className='rounded-[2rem] border border-stone-200 bg-white/80 p-4 shadow-soft backdrop-blur-sm sm:p-8'>
-          <div className='mx-auto max-w-3xl'>
-            <div className='text-center'>
-              <h2 className='text-sm font-bold uppercase tracking-[0.25em] text-stone-500'>
-                Letras do dia
-              </h2>
-            </div>
-
-            <LetterBoard
-              letters={letters}
-              requiredLetter={requiredLetter}
-              onSelectRequired={selectRequiredLetter}
-            />
-
-            <RequiredLetterSelector
-              letters={letters}
-              requiredLetter={requiredLetter}
-              onSelect={selectRequiredLetter}
-            />
-
-            <VirtualKeyboard
-              letters={letters}
-              onAddLetter={addLetter}
-              onDeleteLast={removeLastLetter}
-              onClearAll={clearLetters}
-            />
-
-            <div className='mt-6 flex flex-col items-center justify-center gap-4 sm:flex-row'>
-              <SearchButton
-                isLoading={searchLoading}
-                disabled={!canSearch || dictionaryLoading}
-                onClick={handleSearch}
-              />
-            </div>
-          </div>
-        </section>
-
-        <section className='mt-8 space-y-6'>
-          <div
-            aria-live='polite'
-            className='sr-only'
-          >
-            {statusMessage}
-          </div>
-
-          <div className='rounded-[1.75rem] border border-stone-200 bg-white/80 p-4 shadow-soft sm:p-6'>
-            <div className='flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between'>
-              <div>
-                <h2 className='text-lg font-bold text-slate-900'>Resultados</h2>
-                <p className='text-sm text-stone-500'>
-                  {dictionaryLoading
-                    ? 'Carregando o dicionário...'
-                    : dictionaryError
-                      ? dictionaryError
-                      : canSearch && `Total: ${totalWords} palavras`}
-                </p>
+        <div className='grid gap-8 lg:grid-cols-2'>
+          {/* coluna esquerda: jogo */}
+          <section className='rounded-[2rem] border border-stone-200 bg-white/80 p-4 shadow-soft backdrop-blur-sm sm:p-8'>
+            <div className='mx-auto max-w-3xl'>
+              <div className='text-center'>
+                <h2 className='text-sm font-bold uppercase tracking-[0.25em] text-stone-500'>
+                  Letras do dia
+                </h2>
               </div>
 
-              {(selectedResults.length > 0 || selectedLengths.length > 0) && (
-                <div className='flex flex-col items-end gap-2 text-xs text-stone-600'>
-                  <div className='flex flex-wrap justify-end gap-2'>
-                    {resultGroupsByLength.map((group) => {
-                      const isSelected = selectedLengths.includes(group.length)
+              <LetterBoard
+                letters={letters}
+                requiredLetter={requiredLetter}
+                onSelectRequired={selectRequiredLetter}
+              />
 
-                      return (
-                        <button
-                          key={group.id}
-                          type='button'
-                          aria-pressed={isSelected}
-                          onClick={() => toggleLengthFilter(group.length)}
-                          className={[
-                            'rounded-full px-2.5 py-1 font-semibold transition-colors duration-150',
-                            isSelected
-                              ? 'bg-teal-500 text-white ring-1 ring-inset ring-teal-300'
-                              : 'bg-stone-100 text-stone-600 hover:bg-stone-200',
-                          ].join(' ')}
-                        >
-                          {group.length} letras: {group.entries.length}
-                        </button>
-                      )
-                    })}
+              <RequiredLetterSelector
+                letters={letters}
+                requiredLetter={requiredLetter}
+                onSelect={selectRequiredLetter}
+              />
+
+              <VirtualKeyboard
+                letters={letters}
+                onAddLetter={addLetter}
+                onDeleteLast={removeLastLetter}
+                onClearAll={clearLetters}
+              />
+
+              <div className='mt-6 flex flex-col items-center justify-center gap-4 sm:flex-row'>
+                <SearchButton
+                  isLoading={searchLoading}
+                  disabled={!canSearch || dictionaryLoading}
+                  onClick={handleSearch}
+                />
+              </div>
+            </div>
+          </section>
+
+          {/* coluna direita: resultados */}
+          <section>
+            <div
+              aria-live='polite'
+              className='sr-only'
+            >
+              {statusMessage}
+            </div>
+
+            <div className='rounded-[1.75rem] border border-stone-200 bg-white/80 p-4 shadow-soft sm:p-6'>
+              <div className='flex flex-col gap-4'>
+                <div>
+                  <h2 className='text-lg font-bold text-slate-900'>
+                    Resultados
+                  </h2>
+
+                  <p className='text-sm text-stone-500'>
+                    {dictionaryLoading
+                      ? 'Carregando o dicionário...'
+                      : dictionaryError
+                        ? dictionaryError
+                        : canSearch && `Total: ${totalWords} palavras`}
+                  </p>
+                </div>
+
+                {(selectedResults.length > 0 || selectedLengths.length > 0) && (
+                  <div className='flex flex-col items-end gap-2 text-xs text-stone-600'>
+                    <div className='flex flex-wrap justify-end gap-2'>
+                      {resultGroupsByLength.map((group) => {
+                        const isSelected = selectedLengths.includes(
+                          group.length,
+                        )
+
+                        return (
+                          <button
+                            key={group.id}
+                            type='button'
+                            aria-pressed={isSelected}
+                            onClick={() => toggleLengthFilter(group.length)}
+                            className={[
+                              'rounded-full px-2.5 py-1 font-semibold transition-colors duration-150',
+                              isSelected
+                                ? 'bg-teal-500 text-white ring-1 ring-inset ring-teal-300'
+                                : 'bg-stone-100 text-stone-600 hover:bg-stone-200',
+                            ].join(' ')}
+                          >
+                            {group.length} letras: {group.entries.length}
+                          </button>
+                        )
+                      })}
+                    </div>
+
+                    {selectedLengths.length > 0 && (
+                      <button
+                        type='button'
+                        onClick={clearLengthFilters}
+                        className='py-1 font-semibold'
+                      >
+                        Limpar filtros
+                      </button>
+                    )}
                   </div>
+                )}
 
-                  {selectedLengths.length > 0 && (
-                    <button
-                      type='button'
-                      onClick={clearLengthFilters}
-                      className=' py-1 font-semibold'
+                <div className='max-h-[600px] overflow-y-auto pr-2'>
+                  {dictionaryLoading ? (
+                    <div className='rounded-xl border border-dashed border-stone-200 bg-stone-50 p-6 text-center text-sm text-stone-500'>
+                      Carregando o dicionário...
+                    </div>
+                  ) : dictionaryError ? (
+                    <div
+                      className='rounded-xl border border-dashed border-rose-200 bg-rose-50 p-6 text-center text-sm text-rose-700'
+                      role='alert'
                     >
-                      Limpar filtros
-                    </button>
+                      {dictionaryError}
+                    </div>
+                  ) : canSearch ? (
+                    <ResultsList groups={filteredResultGroups} />
+                  ) : (
+                    <div className='rounded-xl border border-dashed border-stone-200 bg-stone-50 p-6 text-center text-sm text-stone-500'>
+                      Insira as 7 letras do dia para começar.
+                    </div>
                   )}
                 </div>
-              )}
+              </div>
             </div>
-
-            {dictionaryLoading ? (
-              <div className='mt-5 rounded-xl border border-dashed border-stone-200 bg-stone-50 p-6 text-center text-sm text-stone-500'>
-                Carregando o dicionário...
-              </div>
-            ) : dictionaryError ? (
-              <div
-                className='mt-5 rounded-xl border border-dashed border-rose-200 bg-rose-50 p-6 text-center text-sm text-rose-700'
-                role='alert'
-              >
-                {dictionaryError}
-              </div>
-            ) : canSearch ? (
-              <div className='mt-5'>
-                <ResultsList groups={filteredResultGroups} />
-              </div>
-            ) : (
-              <div className='mt-5 rounded-xl border border-dashed border-stone-200 bg-stone-50 p-6 text-center text-sm text-stone-500'>
-                Insira as 7 letras do dia para começar.
-              </div>
-            )}
-          </div>
-        </section>
+          </section>
+        </div>
       </div>
     </main>
   )
