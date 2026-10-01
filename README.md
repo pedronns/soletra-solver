@@ -1,4 +1,4 @@
-# Soletra Helper
+# Soletra Solver
 
 Aplicação web que procura, no dicionário local, palavras formadas apenas pelas sete letras escolhidas para uma rodada do jogo Soletra. Cada palavra precisa conter também a letra obrigatória.
 

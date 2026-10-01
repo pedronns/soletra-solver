@@ -1,5 +1,5 @@
 {
-  "name": "soletra-helper",
+  "name": "soletra-solver",
   "private": true,
   "scripts": {
     "dev": "next dev",

@@ -223,7 +223,7 @@ export default function Page() {
       <div className='mx-auto max-w-5xl px-4 pb-12 pt-8 sm:px-6 lg:px-8'>
         <header className='mb-8 flex flex-col gap-2 text-center sm:text-left'>
           <h1 className='text-3xl font-black tracking-tight text-slate-900 sm:text-4xl'>
-            Soletra Helper
+            Soletra Solver
           </h1>
           <p className='text-base text-stone-600'>
             Encontre palavras possíveis com as letras do dia.
