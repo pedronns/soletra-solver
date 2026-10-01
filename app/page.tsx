@@ -296,32 +296,35 @@ export default function Page() {
               </div>
 
               {(selectedResults.length > 0 || selectedLengths.length > 0) && (
-                <div className='flex flex-wrap items-center gap-2 text-xs text-stone-600'>
-                  {resultGroupsByLength.map((group) => {
-                    const isSelected = selectedLengths.includes(group.length)
+                <div className='flex flex-col items-end gap-2 text-xs text-stone-600'>
+                  <div className='flex flex-wrap justify-end gap-2'>
+                    {resultGroupsByLength.map((group) => {
+                      const isSelected = selectedLengths.includes(group.length)
 
-                    return (
-                      <button
-                        key={group.id}
-                        type='button'
-                        aria-pressed={isSelected}
-                        onClick={() => toggleLengthFilter(group.length)}
-                        className={[
-                          'rounded-full px-2.5 py-1 font-semibold transition-colors duration-150',
-                          isSelected
-                            ? 'bg-teal-500 text-white ring-1 ring-inset ring-teal-300'
-                            : 'bg-stone-100 text-stone-600 hover:bg-stone-200',
-                        ].join(' ')}
-                      >
-                        {group.length} letras: {group.entries.length}
-                      </button>
-                    )
-                  })}
+                      return (
+                        <button
+                          key={group.id}
+                          type='button'
+                          aria-pressed={isSelected}
+                          onClick={() => toggleLengthFilter(group.length)}
+                          className={[
+                            'rounded-full px-2.5 py-1 font-semibold transition-colors duration-150',
+                            isSelected
+                              ? 'bg-teal-500 text-white ring-1 ring-inset ring-teal-300'
+                              : 'bg-stone-100 text-stone-600 hover:bg-stone-200',
+                          ].join(' ')}
+                        >
+                          {group.length} letras: {group.entries.length}
+                        </button>
+                      )
+                    })}
+                  </div>
+
                   {selectedLengths.length > 0 && (
                     <button
                       type='button'
                       onClick={clearLengthFilters}
-                      className='rounded-full px-2.5 py-1 font-semibold transition-colors duration-150'
+                      className=' py-1 font-semibold'
                     >
                       Limpar filtros
                     </button>
