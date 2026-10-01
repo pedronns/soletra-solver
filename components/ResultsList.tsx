@@ -3,10 +3,9 @@ import { WordGroup as WordGroupComponent } from './WordGroup';
 
 type ResultsListProps = {
   groups: WordGroup[];
-  onStatusChange: (id: string, status: 'accepted' | 'rejected' | 'not-tested') => void;
 };
 
-export function ResultsList({ groups, onStatusChange }: ResultsListProps) {
+export function ResultsList({ groups }: ResultsListProps) {
   if (groups.length === 0) {
     return (
       <div className="rounded-2xl border border-dashed border-stone-200 bg-white/70 p-8 text-center text-sm text-stone-500">
@@ -16,9 +15,9 @@ export function ResultsList({ groups, onStatusChange }: ResultsListProps) {
   }
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-4">
       {groups.map((group) => (
-        <WordGroupComponent key={group.id} length={group.length} entries={group.entries} onStatusChange={onStatusChange} />
+        <WordGroupComponent key={group.id} length={group.length} entries={group.entries} />
       ))}
     </div>
   );

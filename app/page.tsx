@@ -1,31 +1,97 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
-import { AddWordForm } from '@/components/AddWordForm'
 import { LetterBoard } from '@/components/LetterBoard'
 import { RequiredLetterSelector } from '@/components/RequiredLetterSelector'
 import { ResultsList } from '@/components/ResultsList'
 import { SearchButton } from '@/components/SearchButton'
 import { VirtualKeyboard } from '@/components/VirtualKeyboard'
-import { DEFAULT_LETTERS, MOCK_WORDS } from '@/lib/mock-data'
-import { WordEntry, WordStatus, WordGroup } from '@/lib/types'
-import {
-  buildSearchResults,
-  normalizeForComparison,
-  validateManualWord,
-} from '@/lib/word-utils'
+import { WordEntry, WordGroup } from '@/lib/types'
+import { buildSearchResults, parseDictionary } from '@/lib/word-utils'
+
+const LETTERS_STORAGE_KEY = 'soletra-selected-letters'
 
 export default function Page() {
-  const [letters, setLetters] = useState<string[]>(DEFAULT_LETTERS)
+  const [letters, setLetters] = useState<string[]>([])
   const [requiredLetter, setRequiredLetter] = useState<string>('')
-  const [allWords, setAllWords] = useState<WordEntry[]>(MOCK_WORDS)
+  const [selectionRestored, setSelectionRestored] = useState(false)
+  const [dictionaryWords, setDictionaryWords] = useState<WordEntry[]>([])
+  const [dictionaryLoading, setDictionaryLoading] = useState(true)
+  const [dictionaryError, setDictionaryError] = useState<string | null>(null)
   const [selectedResults, setSelectedResults] = useState<WordGroup[]>([])
+  const [selectedLengths, setSelectedLengths] = useState<number[]>([])
   const [searchLoading, setSearchLoading] = useState(false)
-  const [manualWord, setManualWord] = useState('')
-  const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const [statusMessage, setStatusMessage] = useState('')
 
   const canSearch = letters.length === 7 && Boolean(requiredLetter)
+
+  useEffect(() => {
+    try {
+      const storedSelection = window.localStorage.getItem(LETTERS_STORAGE_KEY)
+
+      if (storedSelection) {
+        const parsed = JSON.parse(storedSelection) as {
+          letters?: unknown
+          requiredLetter?: unknown
+        } | null
+        const storedLetters = Array.isArray(parsed?.letters)
+          ? parsed.letters.filter(
+              (letter): letter is string =>
+                typeof letter === 'string' && /^[A-ZÀ-ÖØ-ÞÇ]$/.test(letter),
+            )
+          : []
+        const restoredLetters = Array.from(new Set(storedLetters)).slice(0, 7)
+
+        setLetters(restoredLetters)
+        setRequiredLetter(
+          typeof parsed?.requiredLetter === 'string' &&
+            restoredLetters.includes(parsed.requiredLetter)
+            ? parsed.requiredLetter
+            : '',
+        )
+      }
+    } catch {
+      // Keep the in-memory selection usable when storage is unavailable or invalid.
+    } finally {
+      setSelectionRestored(true)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!selectionRestored) return
+
+    try {
+      window.localStorage.setItem(
+        LETTERS_STORAGE_KEY,
+        JSON.stringify({ letters, requiredLetter }),
+      )
+    } catch {
+      // Ignore storage restrictions; the in-memory selection still works.
+    }
+  }, [letters, requiredLetter, selectionRestored])
+
+  useEffect(() => {
+    let isMounted = true
+
+    fetch('/api/dictionary')
+      .then((response) => {
+        if (!response.ok) throw new Error('Dictionary request failed')
+        return response.text()
+      })
+      .then((text) => {
+        if (isMounted) setDictionaryWords(parseDictionary(text))
+      })
+      .catch(() => {
+        if (isMounted) setDictionaryError('Não foi possível carregar o dicionário.')
+      })
+      .finally(() => {
+        if (isMounted) setDictionaryLoading(false)
+      })
+
+    return () => {
+      isMounted = false
+    }
+  }, [])
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -59,17 +125,17 @@ export default function Page() {
   }, [letters, requiredLetter])
 
   useEffect(() => {
-    if (!canSearch) {
+    if (!canSearch || dictionaryLoading) {
       setSelectedResults([])
       return
     }
 
     const timeout = window.setTimeout(() => {
-      setSelectedResults(buildSearchResults(allWords, letters, requiredLetter))
+      setSelectedResults(buildSearchResults(dictionaryWords, letters, requiredLetter))
     }, 180)
 
     return () => window.clearTimeout(timeout)
-  }, [allWords, letters, requiredLetter, canSearch])
+  }, [dictionaryWords, dictionaryLoading, letters, requiredLetter, canSearch])
 
   const totalWords = useMemo(
     () =>
@@ -110,7 +176,6 @@ export default function Page() {
   const clearLetters = () => {
     setLetters([])
     setRequiredLetter('')
-    setErrorMessage(null)
   }
 
   const selectRequiredLetter = (letter: string) => {
@@ -119,64 +184,18 @@ export default function Page() {
   }
 
   const handleSearch = () => {
-    if (!canSearch) return
+    if (!canSearch || dictionaryLoading) return
 
     setSearchLoading(true)
     setStatusMessage('Buscando palavras possíveis...')
 
     window.setTimeout(() => {
-      setSelectedResults(buildSearchResults(allWords, letters, requiredLetter))
+      setSelectedResults(buildSearchResults(dictionaryWords, letters, requiredLetter))
       setSearchLoading(false)
       setStatusMessage(
         `Resultados atualizados para a letra obrigatória ${requiredLetter}.`,
       )
     }, 500)
-  }
-
-  const handleStatusChange = (id: string, status: WordStatus) => {
-    setAllWords((current) =>
-      current.map((entry) => (entry.id === id ? { ...entry, status } : entry)),
-    )
-    setStatusMessage(
-      `Status atualizado para ${status === 'accepted' ? 'aceita' : status === 'rejected' ? 'rejeitada' : 'não testada'}.`,
-    )
-  }
-
-  const handleAddManualWord = () => {
-    const validation = validateManualWord(manualWord, letters, requiredLetter)
-    if (validation) {
-      setErrorMessage(validation)
-      return
-    }
-
-    const normalized = manualWord.trim()
-    const duplicate = allWords.some((entry) =>
-      entry.variants.some(
-        (variant) =>
-          normalizeForComparison(variant) ===
-          normalizeForComparison(normalized),
-      ),
-    )
-
-    if (duplicate) {
-      setErrorMessage('Essa palavra já foi adicionada.')
-      return
-    }
-
-    const newEntry: WordEntry = {
-      id: `manual-${Date.now()}`,
-      display: normalized,
-      variants: [normalized],
-      normalized: normalized.toLowerCase(),
-      length: normalized.length,
-      status: 'not-tested',
-      origin: 'manual',
-    }
-
-    setAllWords((current) => [...current, newEntry])
-    setManualWord('')
-    setErrorMessage(null)
-    setStatusMessage(`Palavra adicionada: ${normalized}`)
   }
 
   const resultGroupsByLength = selectedResults.map((group) => ({
@@ -185,6 +204,19 @@ export default function Page() {
       left.display.localeCompare(right.display, 'pt-BR'),
     ),
   }))
+  const filteredResultGroups = selectedLengths.length
+    ? resultGroupsByLength.filter((group) => selectedLengths.includes(group.length))
+    : resultGroupsByLength
+
+  const toggleLengthFilter = (length: number) => {
+    setSelectedLengths((current) =>
+      current.includes(length)
+        ? current.filter((selectedLength) => selectedLength !== length)
+        : [...current, length],
+    )
+  }
+
+  const clearLengthFilters = () => setSelectedLengths([])
 
   return (
     <main className='min-h-screen bg-[#f8f6f1] text-slate-800'>
@@ -228,7 +260,7 @@ export default function Page() {
             <div className='mt-6 flex flex-col items-center justify-center gap-4 sm:flex-row'>
               <SearchButton
                 isLoading={searchLoading}
-                disabled={!canSearch}
+                disabled={!canSearch || dictionaryLoading}
                 onClick={handleSearch}
               />
             </div>
@@ -248,49 +280,68 @@ export default function Page() {
               <div>
                 <h2 className='text-lg font-bold text-slate-900'>Resultados</h2>
                 <p className='text-sm text-stone-500'>
-                  {canSearch
-                    ? `Total: ${totalWords} palavras`
+                  {dictionaryLoading
+                    ? 'Carregando o dicionário...'
+                    : dictionaryError
+                      ? dictionaryError
+                      : canSearch
+                        ? `Total: ${totalWords} palavras`
                     : 'Insira as 7 letras do dia para começar.'}
                 </p>
               </div>
 
-              {selectedResults.length > 0 && (
-                <div className='flex flex-wrap gap-2 text-xs text-stone-600'>
-                  {selectedResults.map((group) => (
-                    <span
-                      key={group.id}
-                      className='rounded-full bg-stone-100 px-2.5 py-1 font-semibold'
+              {(selectedResults.length > 0 || selectedLengths.length > 0) && (
+                <div className='flex flex-wrap items-center gap-2 text-xs text-stone-600'>
+                  {resultGroupsByLength.map((group) => {
+                    const isSelected = selectedLengths.includes(group.length)
+
+                    return (
+                      <button
+                        key={group.id}
+                        type='button'
+                        aria-pressed={isSelected}
+                        onClick={() => toggleLengthFilter(group.length)}
+                        className={[
+                          'rounded-full px-2.5 py-1 font-semibold transition-colors duration-150',
+                          isSelected
+                            ? 'bg-teal-500 text-white ring-1 ring-inset ring-teal-300'
+                            : 'bg-stone-100 text-stone-600 hover:bg-stone-200',
+                        ].join(' ')}
+                      >
+                        {group.length} letras: {group.entries.length}
+                      </button>
+                    )
+                  })}
+                  {selectedLengths.length > 0 && (
+                    <button
+                      type='button'
+                      onClick={clearLengthFilters}
+                      className='rounded-full px-2.5 py-1 font-semibold transition-colors duration-150'
                     >
-                      {group.length} letras: {group.entries.length}
-                    </span>
-                  ))}
+                      Limpar filtros
+                    </button>
+                  )}
                 </div>
               )}
             </div>
 
-            {selectedResults.length > 0 ? (
+            {dictionaryLoading ? (
+              <div className='mt-5 rounded-xl border border-dashed border-stone-200 bg-stone-50 p-6 text-center text-sm text-stone-500'>
+                Carregando o dicionário...
+              </div>
+            ) : dictionaryError ? (
+              <div className='mt-5 rounded-xl border border-dashed border-rose-200 bg-rose-50 p-6 text-center text-sm text-rose-700' role='alert'>
+                {dictionaryError}
+              </div>
+            ) : canSearch ? (
               <div className='mt-5'>
-                <ResultsList
-                  groups={resultGroupsByLength}
-                  onStatusChange={handleStatusChange}
-                />
+                <ResultsList groups={filteredResultGroups} />
               </div>
             ) : (
-              !canSearch && (
-                <div className='mt-5 rounded-xl border border-dashed border-stone-200 bg-stone-50 p-6 text-center text-sm text-stone-500'>
-                  Insira as 7 letras do dia para começar.
-                </div>
-              )
+              <div className='mt-5 rounded-xl border border-dashed border-stone-200 bg-stone-50 p-6 text-center text-sm text-stone-500'>
+                Insira as 7 letras do dia para começar.
+              </div>
             )}
-          </div>
-
-          <div className='rounded-[1.75rem] border border-stone-200 bg-white/80 p-4 shadow-soft sm:p-6'>
-            <AddWordForm
-              value={manualWord}
-              onChange={setManualWord}
-              onSubmit={handleAddManualWord}
-              errorMessage={errorMessage}
-            />
           </div>
         </section>
       </div>

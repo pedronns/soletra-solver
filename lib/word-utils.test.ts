@@ -1,25 +1,24 @@
 import { describe, expect, it } from 'vitest';
-import { groupWords, normalizeForComparison, validateManualWord } from './word-utils';
+import { buildSearchResults, normalizeForComparison, parseDictionary } from './word-utils';
 
 describe('word utilities', () => {
-  it('groups words that differ only by accent marks', () => {
-    const entries = [
-      { display: 'terço', normalized: 'terco', status: 'not-tested', origin: 'dictionary' },
-      { display: 'terçô', normalized: 'terco', status: 'not-tested', origin: 'dictionary' },
-      { display: 'terçó', normalized: 'terco', status: 'accepted', origin: 'dictionary' },
-    ];
+  it('reads one trimmed word per dictionary line and groups accent variants', () => {
+    const entries = parseDictionary('  terço  \nterçô\n\nterçó\nTERÇO\n');
 
-    expect(groupWords(entries).length).toBe(1);
-    expect(groupWords(entries)[0].display).toBe('terço/terçô/terçó');
+    expect(entries).toHaveLength(1);
+    expect(entries[0].display).toBe('terço/terçô/terçó');
   });
 
-  it('ignores accents for duplicate detection', () => {
-    expect(normalizeForComparison('terçô')).toBe(normalizeForComparison('terço'));
+  it('normalizes accents while preserving cedilla and punctuation', () => {
+    expect(normalizeForComparison('terçô')).toBe('terço');
+    expect(normalizeForComparison('terço')).not.toBe(normalizeForComparison('terco'));
+    expect(normalizeForComparison('a-bê-cê')).toBe('a-be-ce');
   });
 
-  it('rejects manual words that do not satisfy the game rules', () => {
-    expect(validateManualWord('mora', ['c', 'a', 's', 'a', 'e', 'm', 'b'], 's')).toBe('A palavra precisa conter a letra obrigatória.');
-    expect(validateManualWord('banzo', ['b', 'a', 'n', 'o'], 'z')).toBe('Essa palavra não utiliza apenas as letras disponíveis.');
-    expect(validateManualWord('bora', ['b', 'o', 'r', 'a', 'c', 'e', 'm'], 'o')).toBeNull();
+  it('applies length, required-letter, and available-letter rules after normalization', () => {
+    const entries = parseDictionary('sol\nsola\nárabe\nárabes\n');
+    const results = buildSearchResults(entries, ['a', 'r', 'b', 'e', 'l', 'o', 'x'], 'a');
+
+    expect(results.flatMap((group) => group.entries.map((entry) => entry.display))).toEqual(['árabe']);
   });
 });
