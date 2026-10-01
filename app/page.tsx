@@ -254,7 +254,7 @@ export default function Page() {
                 </h2>
               </div>
 
-              <div className='flex flex-1 flex-col justify-between'>
+              <div className='flex flex-1 flex-col justify-between mt-4'>
                 <div>
                   <LetterBoard
                     letters={letters}
