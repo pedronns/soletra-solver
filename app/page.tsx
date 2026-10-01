@@ -101,13 +101,23 @@ export default function Page() {
         target instanceof HTMLInputElement ||
         target instanceof HTMLTextAreaElement
 
-      if (isTypingInInput) return
+      if (
+        isTypingInInput ||
+        event.ctrlKey ||
+        event.metaKey ||
+        event.altKey
+      ) {
+        return
+      }
 
       const key = event.key.toUpperCase()
 
-      if (/^[A-ZÀ-ÖØ-ÞÇ]$/.test(key)) {
+      if (/^[A-ZÀ-ÖØ-ÞÇ]$/.test(key) && !letters.includes(key)) {
         event.preventDefault()
-        addLetter(key)
+        setLetters((current) => {
+          if (current.includes(key) || current.length >= 7) return current
+          return [...current, key]
+        })
       }
 
       if (event.key === 'Backspace') {
@@ -214,6 +224,7 @@ export default function Page() {
         selectedLengths.includes(group.length),
       )
     : resultGroupsByLength
+  const hasVisibleResults = filteredResultGroups.length > 0
 
   const toggleLengthFilter = (length: number) => {
     setSelectedLengths((current) =>
@@ -226,9 +237,9 @@ export default function Page() {
   const clearLengthFilters = () => setSelectedLengths([])
 
   return (
-    <main className='min-h-screen bg-[#f8f6f1] text-slate-800'>
-      <div className='mx-auto max-w-[1440px] px-4 pb-12 pt-8 sm:px-6 lg:px-8'>
-        <header className='mb-8 flex flex-col gap-2 text-center sm:text-left'>
+    <main className='min-h-screen bg-[#f8f6f1] text-slate-800 lg:h-dvh lg:overflow-hidden'>
+      <div className='mx-auto max-w-[1440px] px-4 pb-12 pt-8 sm:px-6 lg:flex lg:h-full lg:flex-col lg:overflow-hidden lg:px-8 lg:pb-6 lg:pt-6'>
+        <header className='mb-8 flex flex-col gap-2 text-center sm:text-left lg:mb-4 lg:shrink-0'>
           <h1 className='text-3xl font-black tracking-tight text-slate-900 sm:text-4xl'>
             Soletra Solver
           </h1>
@@ -238,9 +249,9 @@ export default function Page() {
           </p>
         </header>
 
-        <div className='grid gap-8 lg:grid-cols-2'>
+        <div className='grid gap-8 lg:min-h-0 lg:flex-1 lg:grid-cols-2'>
           {/* coluna esquerda: jogo */}
-          <section className='rounded-[2rem] border border-stone-200 bg-white/80 p-4 shadow-soft backdrop-blur-sm sm:p-8'>
+          <section className='rounded-[2rem] border border-stone-200 bg-white/80 p-4 shadow-soft backdrop-blur-sm sm:p-8 lg:min-h-0 lg:overflow-y-auto'>
             <div className='mx-auto max-w-3xl'>
               <div className='text-center'>
                 <h2 className='text-sm font-bold uppercase tracking-[0.25em] text-stone-500'>
@@ -278,7 +289,7 @@ export default function Page() {
           </section>
 
           {/* coluna direita: resultados */}
-          <section>
+          <section className='lg:min-h-0'>
             <div
               aria-live='polite'
               className='sr-only'
@@ -286,8 +297,18 @@ export default function Page() {
               {statusMessage}
             </div>
 
-            <div className='rounded-[1.75rem] border border-stone-200 bg-white/80 p-4 shadow-soft sm:p-6'>
-              <div className='flex flex-col gap-4'>
+            <div
+              className={`rounded-[1.75rem] border border-stone-200 bg-white/80 p-4 shadow-soft sm:p-6 ${
+                hasVisibleResults
+                  ? 'lg:flex lg:h-full lg:min-h-0 lg:flex-col'
+                  : ''
+              }`}
+            >
+              <div
+                className={`flex flex-col gap-4 ${
+                  hasVisibleResults ? 'lg:min-h-0 lg:flex-1' : ''
+                }`}
+              >
                 <div>
                   <h2 className='text-lg font-bold text-slate-900'>
                     Resultados
@@ -341,7 +362,13 @@ export default function Page() {
                   </div>
                 )}
 
-                <div className='max-h-[600px] overflow-y-auto pr-2'>
+                <div
+                  className={
+                    hasVisibleResults
+                      ? 'lg:min-h-0 lg:flex-1 lg:overflow-y-auto lg:pr-2'
+                      : ''
+                  }
+                >
                   {dictionaryLoading ? (
                     <div className='rounded-xl border border-dashed border-stone-200 bg-stone-50 p-6 text-center text-sm text-stone-500'>
                       Carregando o dicionário...
