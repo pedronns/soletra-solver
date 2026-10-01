@@ -20,12 +20,17 @@ export function VirtualKeyboard({
   const hasReachedLimit = letters.length >= 7;
 
   return (
-    <div className="mt-6 space-y-3">
+    <div className="mx-[-0.6rem] mt-6 w-[calc(100%+1.2rem)] space-y-3 sm:mx-auto sm:w-full">
       <div className="flex flex-col items-center gap-2">
         {KEYBOARD_ROWS.map((row, rowIndex) => (
           <div
             key={rowIndex}
-            className="flex justify-center gap-1.5 sm:gap-2"
+            className={[
+              'flex justify-center gap-0.5 sm:w-fit sm:gap-2',
+              rowIndex < 2
+                ? 'w-full max-w-[32rem]'
+                : 'w-[70%] max-w-[22.25rem]',
+            ].join(' ')}
           >
             {row.map((letter) => {
               const isSelected = letters.includes(letter);
@@ -37,7 +42,7 @@ export function VirtualKeyboard({
                   type="button"
                   onClick={() => onAddLetter(letter)}
                   className={[
-                    'flex h-11 w-9 items-center justify-center rounded-xl border text-sm font-semibold transition-all duration-150 sm:w-11',
+                    'flex h-11 min-w-6 flex-1 items-center justify-center rounded-xl border text-sm font-semibold transition-all duration-150 sm:min-w-0 sm:w-11 sm:flex-none',
                     isSelected
                       ? 'border-teal-300 bg-teal-100 text-teal-900'
                       : 'border-stone-200 bg-white text-slate-700 hover:-translate-y-0.5'

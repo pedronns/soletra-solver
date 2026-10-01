@@ -82,7 +82,8 @@ export default function Page() {
         if (isMounted) setDictionaryWords(parseDictionary(text))
       })
       .catch(() => {
-        if (isMounted) setDictionaryError('Não foi possível carregar o dicionário.')
+        if (isMounted)
+          setDictionaryError('Não foi possível carregar o dicionário.')
       })
       .finally(() => {
         if (isMounted) setDictionaryLoading(false)
@@ -131,7 +132,9 @@ export default function Page() {
     }
 
     const timeout = window.setTimeout(() => {
-      setSelectedResults(buildSearchResults(dictionaryWords, letters, requiredLetter))
+      setSelectedResults(
+        buildSearchResults(dictionaryWords, letters, requiredLetter),
+      )
     }, 180)
 
     return () => window.clearTimeout(timeout)
@@ -190,7 +193,9 @@ export default function Page() {
     setStatusMessage('Buscando palavras possíveis...')
 
     window.setTimeout(() => {
-      setSelectedResults(buildSearchResults(dictionaryWords, letters, requiredLetter))
+      setSelectedResults(
+        buildSearchResults(dictionaryWords, letters, requiredLetter),
+      )
       setSearchLoading(false)
       setStatusMessage(
         `Resultados atualizados para a letra obrigatória ${requiredLetter}.`,
@@ -205,7 +210,9 @@ export default function Page() {
     ),
   }))
   const filteredResultGroups = selectedLengths.length
-    ? resultGroupsByLength.filter((group) => selectedLengths.includes(group.length))
+    ? resultGroupsByLength.filter((group) =>
+        selectedLengths.includes(group.length),
+      )
     : resultGroupsByLength
 
   const toggleLengthFilter = (length: number) => {
@@ -284,9 +291,7 @@ export default function Page() {
                     ? 'Carregando o dicionário...'
                     : dictionaryError
                       ? dictionaryError
-                      : canSearch
-                        ? `Total: ${totalWords} palavras`
-                    : 'Insira as 7 letras do dia para começar.'}
+                      : canSearch && `Total: ${totalWords} palavras`}
                 </p>
               </div>
 
@@ -330,7 +335,10 @@ export default function Page() {
                 Carregando o dicionário...
               </div>
             ) : dictionaryError ? (
-              <div className='mt-5 rounded-xl border border-dashed border-rose-200 bg-rose-50 p-6 text-center text-sm text-rose-700' role='alert'>
+              <div
+                className='mt-5 rounded-xl border border-dashed border-rose-200 bg-rose-50 p-6 text-center text-sm text-rose-700'
+                role='alert'
+              >
                 {dictionaryError}
               </div>
             ) : canSearch ? (
