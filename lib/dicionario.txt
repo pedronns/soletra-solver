@@ -1067,7 +1067,6 @@ abnorme
 abnórmea
 abnormidade
 abnóxio
-ABNT
 abnue
 abnuência
 abnuente
@@ -4801,7 +4800,6 @@ actomiosina
 actomiosínico
 actoprotina
 actorialização
-ACTRAV
 acuã
 acuação
 acuadoiro
@@ -5183,7 +5181,6 @@ Adauto
 ádax
 adaxial
 adclividade
-ADCT
 addisoniano
 addisonismo
 addisonístico
@@ -6066,7 +6063,6 @@ adozelesina
 Adozina
 adpátruo
 adpedância
-ADPF
 adpresso
 adquerido
 adqui
@@ -6208,7 +6204,6 @@ aduelagem
 adufar
 adufeiro
 adufeiros
-ADUFRJ
 adulação
 adulamita
 adulantemente
@@ -6337,7 +6332,6 @@ Aedes
 aedíneo
 aedo
 Aedona
-AEEAD
 Aegla
 aegypti
 Aélia
@@ -6812,7 +6806,6 @@ afixar
 afixável
 afixivo
 afixos
-AFJU
 aflamengar
 aflar
 aflato
@@ -7046,7 +7039,6 @@ aftito
 aftitolita
 aftitolítico
 aftitólito
-AFTN
 aftófito
 aftoide
 aftongia
@@ -7570,7 +7562,6 @@ aglossóstomo
 aglossostomografia
 aglossostomográfico
 aglossostomógrafo
-AGLP
 aglutição
 aglutinação
 aglutinado
@@ -8282,7 +8273,6 @@ Aidoneus
 aidro
 aids
 aidurancá
-AIEA
 aiênia
 aier
 aiereba
@@ -8319,7 +8309,6 @@ aimaroparlante
 Aimás
 Aimberê
 aimbiré
-AIME
 Aimé
 Aimê
 Aimeé
@@ -16228,7 +16217,6 @@ anedotomaníaco
 anedotômano
 anedral
 anédrico
-ANEEL
 anegaça
 anegalhar
 anegalheio
@@ -17843,7 +17831,6 @@ anlaga
 anlexanox
 anlintida
 anlodipino
-ANMP
 anobíida
 anobiídeo
 anóbio
@@ -19900,7 +19887,6 @@ apaxifilina
 apazeiro
 apaziguar
 apcitida
-APDL
 apeaçar
 apeadeiro
 apeançar
@@ -19940,7 +19926,6 @@ apeiria
 apeiros
 apejá
 apejar
-APEL
 apelação
 apelar
 apelativo
@@ -24895,7 +24880,6 @@ asinino
 asiolusitanismo
 asir
 asisinate
-ASJT
 asma
 asmanite
 asmanito
@@ -29149,7 +29133,6 @@ bacelarense
 baceleiro
 bacelia
 bacelos
-BACEN
 bacento
 baceprofeno
 bacês
@@ -37010,7 +36993,6 @@ Blumenau
 blusa
 blusão
 blusinha
-BNDES
 boaba
 boabá
 boacatinga
@@ -38630,7 +38612,6 @@ bozó
 bozoniano
 Bozra
 bozum
-BPSM
 braba
 brabanção
 brabançona
@@ -51872,7 +51853,6 @@ cazumbra
 cazuré
 Cazuza
 cazuzinha
-CEAJud
 ceanoto
 cear
 Ceará
@@ -51880,7 +51860,6 @@ ceará
 cearás
 cearense
 cearenses
-Ceasa
 ceata
 ceba
 cebar
@@ -52061,7 +52040,6 @@ cedrosta
 cédula
 cedular
 ceeiro
-CEERGS
 cefacetrila
 cefaclor
 cefadroxil
@@ -52471,7 +52449,6 @@ celêntero
 celenterologia
 celenterose
 céleo
-CELEPAR
 celépode
 celeporáceo
 celepóreo
@@ -54192,7 +54169,6 @@ cetazínico
 cetazocina
 cetazolam
 cetebista
-CETEF
 cetene
 cetênico
 ceteno
@@ -54374,9 +54350,6 @@ cézannesco
 cézanniano
 Cezarina
 cezinho
-CFRB
-CGTB
-CGTP
 chaapta
 chabacano
 chabaçar
@@ -55401,7 +55374,6 @@ cheruteca
 cheruvia
 cherva
 chervetita
-CHESF
 chessilito
 chesterlita
 cheteni
@@ -57195,7 +57167,6 @@ cientístico
 cientologia
 cientológico
 cientólogo
-CIEP
 Ciep
 cieptamida
 cieptolano
@@ -57531,7 +57502,6 @@ cimepanol
 cimério
 cimetidina
 cimetrópio
-CIMI
 cimianto
 cimícico
 cimicida
@@ -57982,7 +57952,6 @@ cioto
 ciotomia
 ciotômico
 ciótomo
-CIPA
 Cipa
 cipaio
 cipanfilina
@@ -58282,7 +58251,6 @@ cisão
 cisaprida
 cisar
 cisbordo
-CISC
 ciscadela
 ciscalhada
 ciscalhagem
@@ -59843,7 +59811,6 @@ clobetasol
 clobetasona
 clobutinol
 clobuzarite
-CLOC
 clocanfamida
 clocapramina
 clocar
@@ -60921,7 +60888,6 @@ codeta
 codetido
 codetilina
 codeúdo
-CODEVASF
 codevedor
 codevido
 códex
@@ -61069,7 +61035,6 @@ cofinanciado
 cofinanciador
 cofinanciamento
 cofinhar
-COFINS
 Cofins
 cofió
 cofisatina
@@ -64204,7 +64169,6 @@ conimbrigense
 conimetria
 conimétrico
 conímetro
-CONIN
 conina
 coninha
 conínico
@@ -64312,7 +64276,6 @@ conluio
 conluioso
 Conlutas
 conlutista
-CONMETRO
 connellita
 cono
 conóbia
@@ -64964,7 +64927,6 @@ contramito
 contramotivo
 contramovimento
 contramuralha
-CONTRAN
 contranatura
 contranaturais
 contrançado
@@ -68069,9 +68031,6 @@ cozinhável
 cozinheiro
 cozinheiros
 cozinho
-CPLP
-CPMF
-CPMI
 crábeo
 crabilhano
 crabônida
@@ -68455,7 +68414,6 @@ cravolandense
 Cravolândia
 cravorana
 cravos
-CREA
 Crea
 creaca
 cream
@@ -68536,7 +68494,6 @@ cremação
 cremadeiro
 cremadoiro
 cremadouro
-CREMAL
 cremalheira
 cremar
 cremáspora
@@ -68558,23 +68515,11 @@ crematório
 cremável
 crêmbalo
 creme
-CREMEB
-CREMEC
-CREMEGO
 cremeira
 cremense
 cremento
-CREMEPA
-CREMEPE
 cremerense
-Cremerj
-CREMERN
-CREMERO
-CREMERS
 cremes
-CREMESC
-CREMESE
-CREMESP
 cremlim
 cremlinologia
 cremlinológico
@@ -68957,7 +68902,6 @@ criftelminte
 criftorístico
 Crigler
 crijoá
-CRIL
 crila
 crilada
 crilanomer
@@ -70971,13 +70915,9 @@ cruzístico
 cruzmaltino
 cruzo
 cruzoide
-CSCE
 csiclovaíta
-CSJT
 ctamalíneo
 ctâmalo
-CTASP
-CTED
 ctena
 ctenacantídeo
 ctenante
@@ -71038,7 +70978,6 @@ ctonografador
 ctonografia
 ctonográfico
 ctonógrafo
-CTPS
 cuaca
 cuaco
 cuacos
@@ -77763,7 +77702,6 @@ dezinho
 dezocina
 dezoito
 Dhekelia
-DHESCA
 diabada
 diabalaústio
 diabalma
@@ -79387,7 +79325,6 @@ diedro
 diedrogoniometria
 diedrogoniométrico
 diedrogoniômetro
-DIEESE
 Dieese
 diefenbáquia
 diefenbaquieia
@@ -81164,7 +81101,6 @@ dirém
 diretibilidade
 diretivo
 direto
-DIRETOR
 Diretor
 diretor
 Diretora
@@ -83689,7 +83625,6 @@ dozão
 doze
 dozem
 dozeno
-DPOC
 dracar
 drácar
 dracena
@@ -83744,7 +83679,6 @@ draquinolol
 drástico
 draubaque
 Dráusio
-DRAV
 dravídico
 dravidismo
 dravidista
@@ -83840,7 +83774,6 @@ drupeolado
 drupífero
 drusiforme
 druso
-DSEG
 duabanga
 duabangáceo
 duaire
@@ -85462,7 +85395,6 @@ edrofônio
 edronocaína
 Edson
 edta
-EDTV
 eduarda
 eduardense
 Eduardo
@@ -85688,7 +85620,6 @@ Efrem
 efronte
 efrontez
 efrotomicina
-EFTA
 efuanga
 efuco
 efue
@@ -87808,7 +87739,6 @@ embraçadeira
 embraçadura
 embraçar
 embraceirar
-EMBRAER
 Embraer
 embragar
 embrague
@@ -88116,7 +88046,6 @@ emeziar
 emezinho
 emfim
 emia
-EMIC
 êmico
 emicocarpo
 emicon
@@ -102860,7 +102789,6 @@ etão
 etapa
 etapalização
 etaqualona
-ETAR
 etário
 etarístico
 etaroteno
@@ -107276,8 +107204,6 @@ fazendória
 fazente
 fazer
 fazível
-FCUP
-FCVS
 feace
 feaciano
 feácio
@@ -107295,7 +107221,6 @@ febeu
 febilheta
 febo
 febra
-FEBRABAN
 febrão
 febras
 febre
@@ -107749,7 +107674,6 @@ femtômetro
 femtossegundo
 fêmur
 femural
-FENABAN
 fenabuteno
 fenacaína
 fenação
@@ -108750,7 +108674,6 @@ fezationa
 fezes
 fezinha
 fezolamina
-FGTS
 fiabesco
 fiabilismo
 fiação
@@ -109129,7 +109052,6 @@ fierásfer
 fierasferídeo
 Fiesp
 fieza
-FIFE
 fife
 fifi
 fífia
@@ -111486,7 +111408,6 @@ fluxométrico
 fluxômetro
 fluzinamida
 fluzoperina
-FNDE
 fobar
 fobia
 fóbico
@@ -117752,7 +117673,6 @@ gatona
 gatorro
 gatos
 gatoso
-GATT
 gatum
 gatunagem
 gatunar
@@ -123265,7 +123185,6 @@ gruta
 grutesco
 gruziar
 gruzínio
-GSAN
 guaaibeambé
 guaaribo
 guabajara
@@ -125920,7 +125839,6 @@ Hazine
 Hazo
 Hazor
 Hazurim
-HDTV
 headdenita
 heango
 heautognose
@@ -133699,7 +133617,6 @@ hovênia
 hovercraft
 hoxa
 hóya
-HRTV
 hsihutsunita
 http
 https
@@ -134268,7 +134185,6 @@ iberólogo
 Ibertioga
 ibertioguense
 íbex
-IBGE
 ibgeano
 Ibiá
 Ibiã
@@ -134467,7 +134383,6 @@ ibope
 iborepiense
 Ibotirama
 ibotiramense
-IBOVESPA
 iboxalá
 iboza
 Ibrahim
@@ -134541,7 +134456,6 @@ icenense
 iceno
 icense
 icenzense
-ICEP
 icéria
 ichacorvar
 ichacorvos
@@ -134569,7 +134483,6 @@ icle
 icmádio
 icmadofilia
 icmadófilo
-ICMS
 icnanto
 icneumo
 icnêumon
@@ -134826,7 +134739,6 @@ icuns
 icurê
 icussuca
 icuzulapata
-ICVM
 idacanta
 idade
 idades
@@ -136186,7 +136098,6 @@ impetrativo
 impetratório
 impetrável
 impetuoso
-IMPF
 impi
 impiamente
 impiedado
@@ -137618,7 +137529,6 @@ inensinável
 inenubilidade
 inenvergável
 íneo
-Inep
 inépcia
 inepciamente
 ineptidão
@@ -137655,7 +137565,6 @@ inertizar
 inerudito
 inervação
 inervar
-Inês
 inês
 inescado
 inescapável
@@ -138354,7 +138263,6 @@ inlás
 inlé
 inlhofo
 inliçar
-INMETRO
 inoanense
 inobjetável
 inobjetividade
@@ -138676,7 +138584,6 @@ insopitável
 insossar
 insossego
 insossos
-INSP
 inspeção
 inspecionar
 inspecionável
@@ -138701,7 +138608,6 @@ inspiratório
 inspirável
 inspissação
 inspissar
-INSS
 instabilização
 instabilizante
 instabilizar
@@ -140166,7 +140072,6 @@ ipiti
 ipiunense
 Ipixuna
 ipixunense
-IPMF
 ípnops
 ipnópsida
 ipnopsídeo
@@ -140193,7 +140098,6 @@ iporangueiro
 iporanguense
 iporcense
 ipoteuate
-IPPAR
 Ippur
 ipragratina
 ipramidil
@@ -140262,7 +140166,6 @@ ipuquense
 ipuriná
 ipurucotó
 ipuruna
-IPVA
 iquê
 iquebana
 Iques
@@ -140600,7 +140503,6 @@ irosina
 iroso
 irpa
 írpex
-IRPJ
 irra
 irraciocinado
 irraciocinante
@@ -140721,7 +140623,6 @@ irrevisível
 irrevocável
 irrevogado
 irrevogável
-IRRF
 irriariadã
 irridente
 irrigação
@@ -140860,7 +140761,6 @@ isaxonina
 isba
 isbá
 isbelique
-ISBN
 isbogrel
 Isbosete
 isbufilina
@@ -140915,7 +140815,6 @@ iscurético
 iscuria
 iscúria
 iscúrico
-ISDB
 iseganana
 isei
 iseio
@@ -141771,7 +141670,6 @@ issico
 íssida
 issídeo
 issíneo
-ISSN
 isso
 issobo
 issubo
@@ -142495,7 +142393,6 @@ iunense
 iuniense
 iunioca
 iunzense
-IUPAC
 iupati
 iupebense
 iupi
@@ -142510,7 +142407,6 @@ iuraco
 iurará
 iuraracangaçu
 iurari
-IURD
 iuri
 iurimagua
 iurimana
@@ -144080,7 +143976,6 @@ jeca
 Jecameão
 Jecamias
 jecas
-JECC
 Jeceaba
 jeceabano
 jeceabense
@@ -148735,8 +148630,6 @@ lazulite
 lazulítico
 lazulito
 lazurite
-LCDs
-LDBE
 leabeus
 leáchia
 leadbeatera
@@ -150720,7 +150613,6 @@ lézaro
 lezira
 lezirão
 lezíria
-LGBT
 lhagalhé
 lhama
 lhanamente
@@ -150967,7 +150859,6 @@ liçarol
 licaste
 licástea
 licata
-LICC
 lice
 lícea
 liceáceo
@@ -151754,7 +151645,6 @@ lindaquéria
 lindaquerite
 lindar
 lindas
-LINDB
 linde
 lindeiro
 lindelhos
@@ -152799,7 +152689,6 @@ lisossômico
 lisossomo
 lisozima
 lisozímico
-LISP
 lispa
 lispe
 Lispector
@@ -153353,7 +153242,6 @@ lízia
 lizusa
 lizusíneo
 llallagualita
-LNEC
 loação
 loaco
 loalina
@@ -170178,7 +170066,6 @@ mirmosa
 mirmosídeo
 mirmotérula
 Mirna
-miRNA
 mirobalaneiro
 mirobalâneo
 mirobálano
@@ -174495,12 +174382,6 @@ mozina
 mozinho
 mozmodiz
 mozondoense
-MPLA
-MPOG
-mRNA
-MRPP
-MSCOL
-MTVB
 muacara
 muaco
 muádi
@@ -178067,8 +177948,6 @@ Naruto
 Narva
 narval
 narvalina
-NASA
-Nasa
 nasal
 nasalação
 nasalar
@@ -178573,8 +178452,6 @@ nazireu
 nazismo
 nazístico
 nazoreu
-NCOM
-NCST
 ndala
 ndando
 ndarama
@@ -179512,7 +179389,6 @@ nemotarso
 nemótele
 nemótelo
 nemótois
-NEMP
 nemplé
 Nemuel
 nemuelitas
@@ -182956,7 +182832,6 @@ nozilha
 nozilhão
 nozilhento
 nozul
-NTIC
 nuançar
 nuaruaque
 nuas
@@ -183543,7 +183418,6 @@ oblongifólio
 oblongo
 oblongolanceolado
 oblóquio
-OBMEP
 obnoxiação
 obnóxio
 obnubilação
@@ -183839,7 +183713,6 @@ occitanofalante
 occitanofonia
 occitanófono
 occitanoparlante
-OCDE
 oceanápia
 oceanário
 oceanauta
@@ -185217,7 +185090,6 @@ ogivocilíndrico
 ogivoplateresco
 ogivos
 oglifa
-OGMA
 ogmáster
 ogmocóris
 ogmogáster
@@ -186977,7 +186849,6 @@ opelé
 opelés
 opelifá
 OpenOffice
-OPEP
 ópera
 Operação
 operação
@@ -188443,7 +188314,6 @@ ortivo
 ortixelo
 Ortiz
 ortlerite
-ORTN
 orto
 ortoácido
 ortoalbuminúria
@@ -190757,7 +190627,6 @@ pabulagem
 pabulão
 pabular
 pábulo
-PABX
 paca
 pacaá
 pacaás
@@ -190951,7 +190820,6 @@ pacovicunha
 pacóvio
 pacovismo
 pacrinolol
-PACS
 pactar
 pactário
 pactear
@@ -191216,7 +191084,6 @@ paicojê
 paídia
 paiena
 paierioba
-PAIGC
 paigeíta
 pailão
 pailó
@@ -191273,7 +191140,6 @@ paisense
 Países
 países
 paisista
-PAISM
 paíszinho
 paitá
 paitina
@@ -195809,7 +195675,6 @@ pascoíta
 pascóvio
 Paseá
 Paseia
-PASEP
 pasguate
 pasguato
 pasifeia
@@ -206315,11 +206180,6 @@ pluvioscópio
 pluvioso
 pluvipluma
 pluvissilva
-PMDB
-PMSPA
-PMSS
-PNDH
-PNEE
 pneodinâmico
 pneóforo
 pneografia
@@ -206607,7 +206467,6 @@ pneumoventriculografia
 pneumoventriculográfico
 pneus
 pneuzinho
-PNHIS
 pnigo
 pnirôntis
 pnoepiga
@@ -209185,7 +209044,6 @@ posteroposterior
 postetomia
 postetômico
 postfácio
-PostgreSQL
 postiçar
 posticho
 postico
@@ -210392,7 +210250,6 @@ presidencialização
 presidenciável
 Presidenta
 presidenta
-PRESIDENTE
 Presidente
 presidente
 presidentes
@@ -211507,7 +211364,6 @@ projetor
 projetos
 projetoscópio
 projetura
-PROJOVEM
 ProJovem
 prol
 prolabado
@@ -212706,7 +212562,6 @@ proxistomina
 proxorfano
 prozapina
 prozar
-PRTB
 pruá
 pruca
 prucaloprida
@@ -213674,7 +213529,6 @@ psodídimo
 psodimia
 psodímico
 psódimo
-PSOE
 psófia
 psófida
 psofídeo
@@ -213686,7 +213540,6 @@ psofometria
 psofométrico
 psofômetro
 psoíte
-PSOL
 psolíneo
 psolo
 psomofagia
@@ -213719,7 +213572,6 @@ psorospermose
 psorospermósico
 psorótico
 psorotríquia
-PSTU
 ptármico
 ptármiga
 ptélea
@@ -219847,9 +219699,6 @@ razões
 razonar
 razonável
 razoxano
-RCED
-rDNA
-RDTL
 reabastecível
 reabertura
 reabilitação
@@ -223798,7 +223647,6 @@ risanza
 risão
 risarestate
 risbordo
-RISC
 riscação
 riscada
 riscadas
@@ -224140,7 +223988,6 @@ rizotônico
 rizotrogo
 rizoxênia
 rízula
-RNAs
 roadie
 roadster
 roal
@@ -229844,7 +229691,6 @@ sazonático
 sazonável
 sazu
 sborgita
-SBPE
 scabiei
 scacchita
 scarbroíta
@@ -229927,7 +229773,6 @@ scoulerita
 scovillita
 screensaver
 scritorium
-SDTV
 seabórgio
 Seabra
 seabranano
@@ -230023,7 +229868,6 @@ seborreico
 seborreide
 sebos
 seboso
-SEBRAE
 Sebrae
 sebraju
 sebriplatina
@@ -232240,7 +232084,6 @@ sesamolina
 sesamotamno
 sesarna
 sesbânia
-SESC
 sescúncia
 sescuncial
 sescúplice
@@ -232257,7 +232100,6 @@ séselis
 seserigo
 seserino
 sesgo
-SESI
 sésia
 sésica
 sésiga
@@ -232810,7 +232652,6 @@ sibrotuzumabe
 sibthórpia
 sibutramina
 sibuzate
-SICAF
 sicambro
 sicanina
 sicano
@@ -233653,7 +233494,6 @@ simbranco
 simbranquídeo
 simbrânquio
 simbuleta
-SIMC
 Simeão
 Simeate
 simeatitas
@@ -234295,7 +234135,6 @@ Sindjus
 sindo
 síndone
 sindora
-SINDPD
 sindromal
 sindromático
 síndrome
@@ -234679,7 +234518,6 @@ sinóxilo
 sinoxilone
 Sinpef
 Sinpojufes
-SINPRF
 Sinpro
 Sinquião
 sinquilia
@@ -235087,8 +234925,6 @@ sisão
 sisaponense
 sisar
 sisarra
-SISBACEN
-SISBEX
 sisbordo
 sisciano
 siseiro
@@ -235328,7 +235164,6 @@ sizeteta
 sizígio
 sizigite
 sizofirana
-SJRJ
 skate
 skinhead
 slalom
@@ -235341,7 +235176,6 @@ slôgane
 sloganes
 sluitéria
 smartfone
-SMAS
 smirnovita
 smithianismo
 smithianístico
@@ -236572,7 +236406,6 @@ sorbose
 sorbyita
 sorça
 sorção
-SORCER
 sorda
 sordão
 sordária
@@ -239426,7 +239259,6 @@ suscetor
 suscitação
 suscitar
 suscitável
-SUSEP
 Susep
 suseranato
 suserania
@@ -243136,7 +242968,6 @@ teleósteo
 teleóstomo
 teleouvinte
 telepantoscópio
-TELEPAR
 telepata
 telépata
 telepatia
@@ -243195,7 +243026,6 @@ telerrobótico
 telerroentgenterapia
 telerroentgenterápico
 telerruptor
-TELESC
 telescola
 telescopagem
 telescopar
@@ -244171,7 +244001,6 @@ teprenona
 teprosilato
 teprotida
 teque
-TEQUEL
 tequesquita
 tequetar
 tequila
@@ -247848,34 +247677,6 @@ tizita
 tiziu
 tizolemida
 tizoprólico
-TJAC
-TJAL
-TJAM
-TJAP
-TJBA
-TJCE
-TJDF
-TJDFT
-TJES
-TJGO
-TJLP
-TJMA
-TJMG
-TJMS
-TJMT
-TJPA
-TJPB
-TJPE
-TJPI
-TJPR
-TJRJ
-TJRN
-TJRO
-TJRS
-TJSC
-TJSE
-TJSP
-TJTO
 tlaco
 tladianta
 tlaloquita
@@ -256214,21 +256015,14 @@ udótea
 udunga
 udus
 uédi
-UEFA
 Uelizânio
 uena
 uerá
 uerana
 uerequena
 uerimá
-UERJ
-Uerj
 uetacás
 uéua
-UFABC
-Ufac
-Ufal
-Ufam
 ufanar
 ufanático
 ufanear
@@ -256237,28 +256031,13 @@ ufanismo
 ufanístico
 ufanos
 ufanoso
-UFARSIM
 Ufaz
-UFBA
-UFCG
-UFCSPA
 ufenamato
 Ufersa
 ufertita
-UFES
 Ufesba
-UFFRJ
-UFFS
-UFGD
 ufiprazol
-UFIR
 Ufir
-UFJF
-UFLA
-UFMA
-UFMG
-UFMS
-UFMT
 Ufoba
 ufologia
 ufológico
@@ -256270,29 +256049,7 @@ ufômano
 ufonauta
 Ufop
 Ufopa
-UFPA
-UFPB
-UFPE
-UFPEL
-UFPI
-UFPR
-UFRA
-UFRB
-UFRC
-UFRGS
-UFRJ
-UFRN
-UFRPE
-UFRR
-UFRRJ
-UFSC
-UFSCAR
-UFSJ
-UFSM
-UFSSP
-UFTM
 ufuá
-UFVJM
 ugabe
 ugadíssimo
 ugalhar
@@ -257330,9 +257087,6 @@ unissubsistente
 unissulcado
 Unistalda
 unistriado
-Unisys
-UNIT
-UNITA
 unitariedade
 unitário
 unitarístico
@@ -257863,7 +257617,6 @@ ursinos
 urso
 ursodesoxicólico
 ursos
-URSS
 Úrsula
 ursulcólico
 ursulina
@@ -258134,7 +257887,6 @@ uterovesical
 uteruéria
 uteteisa
 uteteísa
-UTFPR
 utiariti
 utiaritiense
 utibapril
@@ -263037,7 +262789,6 @@ volofo
 volovã
 volovelismo
 volovelístico
-VOLP
 volpino
 volpristina
 volsciano
@@ -263301,7 +263052,6 @@ vozeirudo
 vozerio
 vozes
 vozido
-VPNI
 vrancelha
 vrangélia
 vreia
@@ -263480,7 +263230,6 @@ wattímetro
 wattômetro
 watts
 Waziristão
-WCAG
 weber
 weberiano
 webibliografia
@@ -264597,7 +264346,6 @@ zavaneira
 zavar
 zavra
 zazo
-ZCIT
 Zeaxantina
 Zebá
 Zebadias
