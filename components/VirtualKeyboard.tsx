@@ -61,7 +61,7 @@ export function VirtualKeyboard({
         <button
           type='button'
           onClick={onDeleteLast}
-          className='rounded-full border border-stone-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-stone-300'
+          className='rounded-md bg-gray-100 px-4 py-2 text-sm font-semibold text-slate-700 transition'
         >
           Apagar
         </button>
@@ -69,8 +69,8 @@ export function VirtualKeyboard({
         <button
           type='button'
           onClick={onClearAll}
-          className='rounded-full border border-stone-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-stone-300'
-        >
+          className='rounded-md bg-gray-100 px-4 py-2 text-sm font-semibold text-slate-700 transition'
+        >             
           Limpar
         </button>
       </div>

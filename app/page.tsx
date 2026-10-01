@@ -101,12 +101,7 @@ export default function Page() {
         target instanceof HTMLInputElement ||
         target instanceof HTMLTextAreaElement
 
-      if (
-        isTypingInInput ||
-        event.ctrlKey ||
-        event.metaKey ||
-        event.altKey
-      ) {
+      if (isTypingInInput || event.ctrlKey || event.metaKey || event.altKey) {
         return
       }
 
@@ -252,38 +247,36 @@ export default function Page() {
         <div className='grid gap-8 lg:min-h-0 lg:flex-1 lg:grid-cols-2'>
           {/* coluna esquerda: jogo */}
           <section className='rounded-[2rem] border border-stone-200 bg-white/80 p-4 shadow-soft backdrop-blur-sm sm:p-8 lg:min-h-0 lg:overflow-y-auto'>
-            <div className='mx-auto max-w-3xl'>
+            <div className='mx-auto flex h-full max-w-3xl flex-col'>
               <div className='text-center'>
                 <h2 className='text-sm font-bold uppercase tracking-[0.25em] text-stone-500'>
                   Letras do dia
                 </h2>
               </div>
 
-              <LetterBoard
-                letters={letters}
-                requiredLetter={requiredLetter}
-                onSelectRequired={selectRequiredLetter}
-              />
+              <div className='flex flex-1 flex-col justify-between'>
+                <div>
+                  <LetterBoard
+                    letters={letters}
+                    requiredLetter={requiredLetter}
+                    onSelectRequired={selectRequiredLetter}
+                  />
+                </div>
 
-              <RequiredLetterSelector
-                letters={letters}
-                requiredLetter={requiredLetter}
-                onSelect={selectRequiredLetter}
-              />
+                <div className='mb-4 mt-auto sm:mb-6 md:mb-8mb-8 mt-auto'>
+                  <RequiredLetterSelector
+                    letters={letters}
+                    requiredLetter={requiredLetter}
+                    onSelect={selectRequiredLetter}
+                  />
 
-              <VirtualKeyboard
-                letters={letters}
-                onAddLetter={addLetter}
-                onDeleteLast={removeLastLetter}
-                onClearAll={clearLetters}
-              />
-
-              <div className='mt-6 flex flex-col items-center justify-center gap-4 sm:flex-row'>
-                <SearchButton
-                  isLoading={searchLoading}
-                  disabled={!canSearch || dictionaryLoading}
-                  onClick={handleSearch}
-                />
+                  <VirtualKeyboard
+                    letters={letters}
+                    onAddLetter={addLetter}
+                    onDeleteLast={removeLastLetter}
+                    onClearAll={clearLetters}
+                  />
+                </div>
               </div>
             </div>
           </section>
@@ -324,43 +317,41 @@ export default function Page() {
                 </div>
 
                 {(selectedResults.length > 0 || selectedLengths.length > 0) && (
-                  <div className='flex flex-col items-end gap-2 text-xs text-stone-600'>
-                    <div className='flex flex-wrap justify-end gap-2'>
-                      {resultGroupsByLength.map((group) => {
-                        const isSelected = selectedLengths.includes(
-                          group.length,
-                        )
+  <div className='flex flex-col gap-2 text-xs text-stone-600'>
+    <div className='flex flex-wrap gap-2'>
+      {resultGroupsByLength.map((group) => {
+        const isSelected = selectedLengths.includes(group.length)
 
-                        return (
-                          <button
-                            key={group.id}
-                            type='button'
-                            aria-pressed={isSelected}
-                            onClick={() => toggleLengthFilter(group.length)}
-                            className={[
-                              'rounded-full px-2.5 py-1 font-semibold transition-colors duration-150',
-                              isSelected
-                                ? 'bg-teal-500 text-white ring-1 ring-inset ring-teal-300'
-                                : 'bg-stone-100 text-stone-600 hover:bg-stone-200',
-                            ].join(' ')}
-                          >
-                            {group.length} letras: {group.entries.length}
-                          </button>
-                        )
-                      })}
-                    </div>
+        return (
+          <button
+            key={group.id}
+            type='button'
+            aria-pressed={isSelected}
+            onClick={() => toggleLengthFilter(group.length)}
+            className={[
+              'rounded-full px-2.5 py-1 font-semibold transition-colors duration-150',
+              isSelected
+                ? 'bg-teal-500 text-white ring-1 ring-inset ring-teal-300'
+                : 'bg-stone-100 text-stone-600 hover:bg-stone-200',
+            ].join(' ')}
+          >
+            {group.length} letras: {group.entries.length}
+          </button>
+        )
+      })}
+    </div>
 
-                    {selectedLengths.length > 0 && (
-                      <button
-                        type='button'
-                        onClick={clearLengthFilters}
-                        className='py-1 font-semibold'
-                      >
-                        Limpar filtros
-                      </button>
-                    )}
-                  </div>
-                )}
+    {selectedLengths.length > 0 && (
+      <button
+        type='button'
+        onClick={clearLengthFilters}
+        className='self-start py-1 font-semibold'
+      >
+        Limpar filtros
+      </button>
+    )}
+  </div>
+)}
 
                 <div
                   className={
