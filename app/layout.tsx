@@ -1,9 +1,33 @@
 import './globals.css';
 import type { Metadata } from 'next';
+import { siteUrl } from '@/lib/site-config';
+
+const siteName = 'Soletra Solver';
+const siteDescription =
+  'Encontre palavras possíveis usando as sete letras selecionadas e a letra obrigatória.';
 
 export const metadata: Metadata = {
-  title: 'Soletra Solver',
-  description: 'Encontre palavras possíveis com as letras do dia.',
+  ...(siteUrl
+    ? {
+        metadataBase: siteUrl,
+        alternates: { canonical: siteUrl },
+      }
+    : {}),
+  title: siteName,
+  description: siteDescription,
+  applicationName: siteName,
+  openGraph: {
+    title: siteName,
+    description: siteDescription,
+    type: 'website',
+    locale: 'pt_BR',
+    ...(siteUrl ? { url: siteUrl.href } : {}),
+  },
+  twitter: {
+    card: 'summary',
+    title: siteName,
+    description: siteDescription,
+  },
   icons: {
     icon: '/icon.png',
     shortcut: '/icon.png',
