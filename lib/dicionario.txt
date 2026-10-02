@@ -6841,9 +6841,7 @@ agafite
 agafítico
 agafito
 agágio
-agaí
 agaiolar
-agaíte
 agaíto
 agala
 agalacia
@@ -6883,19 +6881,15 @@ agalopados
 agáloque
 agaloquita
 agalorreia
-agama
-agamá
 agamaglobulinemia
 agamaglobulinêmico
 agamandrécia
-agame
 agamemnônida
 agamenônida
 agamermafrodítico
 agamermafroditismo
 agamermafroditístico
 agâmeto
-agami
 agamia
 agamiano
 agâmida
@@ -7045,13 +7039,10 @@ agatário
 agatarquia
 agatárquico
 agatauma
-ágate
 agateado
 agatélpide
 agatélpido
 agáteo
-agati
-agátia
 agátide
 agatídeo
 agatídio
@@ -7100,7 +7091,6 @@ agdéstis
 agedoíte
 agedra
 agédula
-ageia
 agelacrinite
 agelácrino
 agelaio
@@ -7113,7 +7103,6 @@ agelenoide
 ageleu
 agelocrinite
 agelócrino
-agema
 agemado
 agêmate
 agenceio
@@ -7286,7 +7275,6 @@ aglutinoscópio
 aglutometria
 aglutométrico
 aglutômetro
-agma
 agmar
 agmatina
 agmatologia
@@ -7294,7 +7282,6 @@ agmatológico
 agmatólogo
 ágmen
 agmens
-agmi
 agminado
 agminal
 agmíneo
@@ -12259,7 +12246,6 @@ amaestrar
 amafolona
 amagalate
 amagar
-amagat
 âmago
 âmagos
 amagotar
@@ -13396,6 +13382,7 @@ amigdalótomo
 amigdalotripsia
 amigdofinina
 amiglumida
+amiga
 amigo
 amigona
 amigote
@@ -24772,7 +24759,6 @@ atafina
 atafinda
 atafonense
 atafulhar
-atagã
 ataganhar
 ataganir
 ataivado
@@ -82308,8 +82294,6 @@ egerino
 egerita
 egérnia
 egerse
-egesa
-egesta
 egestade
 egestano
 egestão
@@ -111500,7 +111484,6 @@ gadulagem
 gadunhar
 gael
 gaélico
-gaeta
 gafana
 gafanhão
 gafanheiro
@@ -111536,11 +111519,7 @@ gagarinita
 gagata
 gagau
 gagaúba
-gage
-gagé
-gageia
 gageíta
-gagés
 gagino
 gago
 gagosa
@@ -111555,7 +111534,6 @@ gaguismo
 gahnite
 gahnítico
 gahnoespinélio
-gaia
 gaiabalense
 gaiabeia
 gaiabéu
@@ -112480,7 +112458,6 @@ gametógeno
 gametogonia
 gametogônio
 gametoide
-gâmia
 gâmico
 gamóbio
 gamocarpelar
@@ -113225,7 +113202,6 @@ gaseiro
 gáseo
 gaseoducto
 gaseoduto
-gases
 gasganete
 gasganhol
 gasguento
@@ -113651,14 +113627,12 @@ gatária
 gatarrada
 gatarrão
 gatarrona
-gatas
 gatázio
 gate
 gateado
 gateados
 gatear
 gatecismo
-gateia
 gateiro
 gatenho
 gatenhos
@@ -113898,8 +113872,6 @@ geântemo
 geanticlinal
 gear
 gearo
-gease
-géase
 geassa
 geasteira
 geáster
@@ -114109,7 +114081,6 @@ gemagem
 gemar
 gemárico
 gemário
-gemas
 gematria
 gemátria
 gemátrico
@@ -115265,7 +115236,6 @@ gigatonelada
 gigawatt
 gigawatts
 gígia
-gígis
 giglê
 gigliólia
 gigo
@@ -150667,7 +150637,6 @@ magacia
 magadi
 magádico
 magadiita
-magaí
 magaíça
 magaíssa
 magal
@@ -150737,7 +150706,6 @@ magidare
 magilo
 maginar
 magírico
-mágis
 magismo
 magíster
 magisterial
@@ -155598,7 +155566,6 @@ matruqueiro
 matruquinho
 matruz
 matsavo
-mattagamita
 matteuccita
 matthíola
 mattraíta
@@ -156842,7 +156809,6 @@ megasporócito
 megasporofilo
 megasporogênese
 megassafra
-megassaga
 megassemo
 megassena
 megasseresta
@@ -161851,7 +161817,6 @@ migalídeo
 migalismo
 migalomorfo
 migar
-migas
 migdão
 migdoa
 mígdone
@@ -161862,7 +161827,6 @@ migiléxico
 miginda
 miglitol
 miglustate
-migma
 migmatítico
 migmatito
 migmatização
@@ -218980,10 +218944,10 @@ safu
 safucala
 safueiro
 safuta
+saga
 sagaçaria
 sagaceza
 sagácia
-sagai
 sagandipino
 saganho
 saganhos
@@ -219020,7 +218984,6 @@ sagitídeo
 sagitífero
 sagitifoliado
 sagitifólio
-sagma
 sago
 sagócia
 sagona
@@ -219119,7 +219082,6 @@ saieira
 saiense
 saierê
 saieta
-saiga
 saiguira
 saiinho
 saijé
@@ -224996,7 +224958,6 @@ siglonimizar
 siglônimo
 sigma
 sigmafórmio
-sigmas
 sigmatela
 sigmático
 sigmatístico
@@ -231644,7 +231605,6 @@ tágide
 tagídeo
 tagilita
 taglutimida
-tagma
 tagmema
 tagmemático
 tagmêmico
@@ -231698,7 +231658,6 @@ taifa
 taifeiro
 taifó
 taifoada
-taiga
 tailandês
 tailleur
 taimado
@@ -234253,7 +234212,6 @@ tegéria
 tegeríneo
 tegianense
 tegmal
-tegme
 tégmen
 tegmento
 tégmina
@@ -239037,7 +238995,6 @@ tisopurina
 tisoquona
 tisorelho
 tispanodes
-tisságeta
 tissanense
 tissense
 tissierografia
