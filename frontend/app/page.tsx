@@ -8,7 +8,11 @@ import { ResultsList } from '@/components/ResultsList'
 import { SearchButton } from '@/components/SearchButton'
 import { VirtualKeyboard } from '@/components/VirtualKeyboard'
 import { WordAssessment, WordEntry, WordGroup } from '@/lib/types'
-import { buildSearchResults, groupWords, parseDictionary } from '@/lib/word-utils'
+import {
+  buildSearchResults,
+  groupWords,
+  parseDictionary,
+} from '@/lib/word-utils'
 import {
   type ApiWord,
   type ApiWordStatus,
@@ -49,7 +53,9 @@ function mergeDictionaryWords(
   additions: string[],
 ): WordEntry[] {
   return groupWords([
-    ...current.flatMap((entry) => entry.variants.map((display) => ({ display }))),
+    ...current.flatMap((entry) =>
+      entry.variants.map((display) => ({ display })),
+    ),
     ...additions.map((display) => ({ display })),
   ])
 }
@@ -64,8 +70,12 @@ export default function Page() {
   const [addedWordsError, setAddedWordsError] = useState<string | null>(null)
   const [selectedResults, setSelectedResults] = useState<WordGroup[]>([])
   const [selectedLengths, setSelectedLengths] = useState<number[]>([])
-  const [wordAssessments, setWordAssessments] = useState<Record<string, WordAssessment>>({})
-  const [pendingAssessments, setPendingAssessments] = useState<Record<string, boolean>>({})
+  const [wordAssessments, setWordAssessments] = useState<
+    Record<string, WordAssessment>
+  >({})
+  const [pendingAssessments, setPendingAssessments] = useState<
+    Record<string, boolean>
+  >({})
   const [assessmentSyncLoading, setAssessmentSyncLoading] = useState(false)
   const [assessmentError, setAssessmentError] = useState<string | null>(null)
   const [searchLoading, setSearchLoading] = useState(false)
@@ -131,7 +141,10 @@ export default function Page() {
       .then((text) => {
         if (isMounted) {
           setDictionaryWords((current) =>
-            mergeDictionaryWords(current, parseDictionary(text).flatMap((entry) => entry.variants)),
+            mergeDictionaryWords(
+              current,
+              parseDictionary(text).flatMap((entry) => entry.variants),
+            ),
           )
         }
       })
@@ -332,7 +345,10 @@ export default function Page() {
     )
       .then((words) => {
         const statuses = new Map(
-          words.map((word) => [word.word.toLowerCase().normalize('NFC'), word.status]),
+          words.map((word) => [
+            word.word.toLowerCase().normalize('NFC'),
+            word.status,
+          ]),
         )
 
         setWordAssessments((current) => {
@@ -381,9 +397,7 @@ export default function Page() {
   const clearLengthFilters = () => setSelectedLengths([])
 
   const handleWordAdded = (word: ApiWord) => {
-    setDictionaryWords((current) =>
-      mergeDictionaryWords(current, [word.word]),
-    )
+    setDictionaryWords((current) => mergeDictionaryWords(current, [word.word]))
     setAddedWordsError(null)
   }
 
@@ -447,7 +461,10 @@ export default function Page() {
       try {
         const words = await fetchWordStatuses(entry.variants)
         const statuses = new Map(
-          words.map((word) => [word.word.toLowerCase().normalize('NFC'), word.status]),
+          words.map((word) => [
+            word.word.toLowerCase().normalize('NFC'),
+            word.status,
+          ]),
         )
         const persistedAssessment = assessmentForEntry(entry, statuses)
 
@@ -575,60 +592,70 @@ export default function Page() {
                     </p>
                   )}
                   {assessmentError && (
-                    <p className='text-sm text-rose-700' role='alert'>
+                    <p
+                      className='text-sm text-rose-700'
+                      role='alert'
+                    >
                       {assessmentError}
                     </p>
                   )}
                   {addedWordsError && (
-                    <p className='text-sm text-rose-700' role='alert'>
+                    <p
+                      className='text-sm text-rose-700'
+                      role='alert'
+                    >
                       {addedWordsError}
                     </p>
                   )}
                 </div>
 
-                <AddWordForm
-                  existingWords={dictionaryWords}
-                  letters={letters}
-                  requiredLetter={requiredLetter}
-                  onWordAdded={handleWordAdded}
-                />
+                {canSearch && (
+                  <AddWordForm
+                    existingWords={dictionaryWords}
+                    letters={letters}
+                    requiredLetter={requiredLetter}
+                    onWordAdded={handleWordAdded}
+                  />
+                )}
 
                 {(selectedResults.length > 0 || selectedLengths.length > 0) && (
-  <div className='flex flex-col gap-2 text-xs text-stone-600'>
-    <div className='flex flex-wrap gap-2'>
-      {resultGroupsByLength.map((group) => {
-        const isSelected = selectedLengths.includes(group.length)
+                  <div className='flex flex-col gap-2 text-xs text-stone-600'>
+                    <div className='flex flex-wrap gap-2'>
+                      {resultGroupsByLength.map((group) => {
+                        const isSelected = selectedLengths.includes(
+                          group.length,
+                        )
 
-        return (
-          <button
-            key={group.id}
-            type='button'
-            aria-pressed={isSelected}
-            onClick={() => toggleLengthFilter(group.length)}
-            className={[
-              'rounded-full px-2.5 py-1 font-semibold transition-colors duration-150',
-              isSelected
-                ? 'bg-teal-500 text-white ring-1 ring-inset ring-teal-300'
-                : 'bg-stone-100 text-stone-600 hover:bg-stone-200',
-            ].join(' ')}
-          >
-            {group.length} letras: {group.entries.length}
-          </button>
-        )
-      })}
-    </div>
+                        return (
+                          <button
+                            key={group.id}
+                            type='button'
+                            aria-pressed={isSelected}
+                            onClick={() => toggleLengthFilter(group.length)}
+                            className={[
+                              'rounded-full px-2.5 py-1 font-semibold transition-colors duration-150',
+                              isSelected
+                                ? 'bg-teal-500 text-white ring-1 ring-inset ring-teal-300'
+                                : 'bg-stone-100 text-stone-600 hover:bg-stone-200',
+                            ].join(' ')}
+                          >
+                            {group.length} letras: {group.entries.length}
+                          </button>
+                        )
+                      })}
+                    </div>
 
-    {selectedLengths.length > 0 && (
-      <button
-        type='button'
-        onClick={clearLengthFilters}
-        className='self-start py-1 font-semibold'
-      >
-        Limpar filtros
-      </button>
-    )}
-  </div>
-)}
+                    {selectedLengths.length > 0 && (
+                      <button
+                        type='button'
+                        onClick={clearLengthFilters}
+                        className='self-start py-1 font-semibold'
+                      >
+                        Limpar filtros
+                      </button>
+                    )}
+                  </div>
+                )}
 
                 <div
                   className={
