@@ -10,6 +10,46 @@ export function normalizeForComparison(value: string): string {
     .normalize('NFC');
 }
 
+export function validateWordForChallenge(
+  value: string,
+  letters: string[],
+  requiredLetter: string,
+): string | null {
+  const word = value.trim().toLowerCase().normalize('NFC');
+
+  if (!word) return 'Digite uma palavra antes de adicionar.';
+  if (!/^[a-zç]+$/.test(normalizeForComparison(word))) {
+    return 'Use apenas letras, sem espaços ou caracteres especiais.';
+  }
+  if (Array.from(word).length < 4) {
+    return 'A palavra precisa ter pelo menos 4 letras.';
+  }
+  if (
+    letters.length !== 7 ||
+    new Set(letters.map(normalizeForComparison)).size !== 7 ||
+    !requiredLetter ||
+    !letters.some(
+      (letter) =>
+        normalizeForComparison(letter) ===
+        normalizeForComparison(requiredLetter),
+    )
+  ) {
+    return 'Selecione as 7 letras distintas e a letra central antes de adicionar.';
+  }
+
+  const availableLetters = new Set(letters.map(normalizeForComparison));
+  const normalizedWord = normalizeForComparison(word);
+
+  if (!Array.from(normalizedWord).every((letter) => availableLetters.has(letter))) {
+    return 'Essa palavra não pode ser formada com as letras selecionadas.';
+  }
+  if (!normalizedWord.includes(normalizeForComparison(requiredLetter))) {
+    return 'Essa palavra precisa conter a letra central.';
+  }
+
+  return null;
+}
+
 export function parseDictionary(text: string): WordEntry[] {
   const words = text
     .split(/\r?\n/)

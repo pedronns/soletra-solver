@@ -1,15 +1,58 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { LetterBoard } from '@/components/LetterBoard'
+import { AddWordForm } from '@/components/AddWordForm'
 import { RequiredLetterSelector } from '@/components/RequiredLetterSelector'
 import { ResultsList } from '@/components/ResultsList'
 import { SearchButton } from '@/components/SearchButton'
 import { VirtualKeyboard } from '@/components/VirtualKeyboard'
-import { WordEntry, WordGroup } from '@/lib/types'
-import { buildSearchResults, parseDictionary } from '@/lib/word-utils'
+import { WordAssessment, WordEntry, WordGroup } from '@/lib/types'
+import { buildSearchResults, groupWords, parseDictionary } from '@/lib/word-utils'
+import {
+  type ApiWord,
+  type ApiWordStatus,
+  fetchAddedWords,
+  fetchWordStatuses,
+  updateWordStatus,
+} from '@/lib/words-api'
 
 const LETTERS_STORAGE_KEY = 'soletra-selected-letters'
+
+function assessmentForEntry(
+  entry: WordEntry,
+  statuses: Map<string, ApiWordStatus>,
+): WordAssessment | null {
+  for (const variant of entry.variants) {
+    const status = statuses.get(variant.normalize('NFC'))
+    if (status === 'ACCEPTED') return 'confirmed'
+    if (status === 'REJECTED') return 'rejected'
+  }
+
+  return null
+}
+
+function assessmentToApiStatus(
+  assessment: WordAssessment | null,
+): ApiWordStatus {
+  if (assessment === 'confirmed') return 'ACCEPTED'
+  if (assessment === 'rejected') return 'REJECTED'
+  return null
+}
+
+function errorMessage(error: unknown): string {
+  return error instanceof Error ? error.message : 'erro inesperado'
+}
+
+function mergeDictionaryWords(
+  current: WordEntry[],
+  additions: string[],
+): WordEntry[] {
+  return groupWords([
+    ...current.flatMap((entry) => entry.variants.map((display) => ({ display }))),
+    ...additions.map((display) => ({ display })),
+  ])
+}
 
 export default function Page() {
   const [letters, setLetters] = useState<string[]>([])
@@ -18,10 +61,17 @@ export default function Page() {
   const [dictionaryWords, setDictionaryWords] = useState<WordEntry[]>([])
   const [dictionaryLoading, setDictionaryLoading] = useState(true)
   const [dictionaryError, setDictionaryError] = useState<string | null>(null)
+  const [addedWordsError, setAddedWordsError] = useState<string | null>(null)
   const [selectedResults, setSelectedResults] = useState<WordGroup[]>([])
   const [selectedLengths, setSelectedLengths] = useState<number[]>([])
+  const [wordAssessments, setWordAssessments] = useState<Record<string, WordAssessment>>({})
+  const [pendingAssessments, setPendingAssessments] = useState<Record<string, boolean>>({})
+  const [assessmentSyncLoading, setAssessmentSyncLoading] = useState(false)
+  const [assessmentError, setAssessmentError] = useState<string | null>(null)
   const [searchLoading, setSearchLoading] = useState(false)
   const [statusMessage, setStatusMessage] = useState('')
+  const pendingAssessmentIdsRef = useRef(new Set<string>())
+  const assessmentRevisionsRef = useRef<Record<string, number>>({})
 
   const canSearch = letters.length === 7 && Boolean(requiredLetter)
 
@@ -79,7 +129,11 @@ export default function Page() {
         return response.text()
       })
       .then((text) => {
-        if (isMounted) setDictionaryWords(parseDictionary(text))
+        if (isMounted) {
+          setDictionaryWords((current) =>
+            mergeDictionaryWords(current, parseDictionary(text).flatMap((entry) => entry.variants)),
+          )
+        }
       })
       .catch(() => {
         if (isMounted)
@@ -92,6 +146,29 @@ export default function Page() {
     return () => {
       isMounted = false
     }
+  }, [])
+
+  useEffect(() => {
+    const controller = new AbortController()
+
+    fetchAddedWords(controller.signal)
+      .then((words) => {
+        setDictionaryWords((current) =>
+          mergeDictionaryWords(
+            current,
+            words.map((word) => word.word),
+          ),
+        )
+      })
+      .catch((error: unknown) => {
+        if (!controller.signal.aborted) {
+          setAddedWordsError(
+            `Não foi possível carregar as palavras adicionadas: ${errorMessage(error)}`,
+          )
+        }
+      })
+
+    return () => controller.abort()
   }, [])
 
   useEffect(() => {
@@ -208,18 +285,90 @@ export default function Page() {
     }, 500)
   }
 
-  const resultGroupsByLength = selectedResults.map((group) => ({
-    ...group,
-    entries: group.entries.sort((left, right) =>
-      left.display.localeCompare(right.display, 'pt-BR'),
-    ),
-  }))
-  const filteredResultGroups = selectedLengths.length
-    ? resultGroupsByLength.filter((group) =>
-        selectedLengths.includes(group.length),
-      )
-    : resultGroupsByLength
+  const resultGroupsByLength = useMemo(
+    () =>
+      selectedResults.map((group) => ({
+        ...group,
+        entries: [...group.entries].sort((left, right) =>
+          left.display.localeCompare(right.display, 'pt-BR'),
+        ),
+      })),
+    [selectedResults],
+  )
+  const filteredResultGroups = useMemo(
+    () =>
+      selectedLengths.length
+        ? resultGroupsByLength.filter((group) =>
+            selectedLengths.includes(group.length),
+          )
+        : resultGroupsByLength,
+    [resultGroupsByLength, selectedLengths],
+  )
+  const visibleEntries = useMemo(
+    () => filteredResultGroups.flatMap((group) => group.entries),
+    [filteredResultGroups],
+  )
   const hasVisibleResults = filteredResultGroups.length > 0
+
+  useEffect(() => {
+    if (visibleEntries.length === 0) {
+      setAssessmentSyncLoading(false)
+      return
+    }
+
+    const controller = new AbortController()
+    const requestedRevisions = new Map(
+      visibleEntries.map((entry) => [
+        entry.id,
+        assessmentRevisionsRef.current[entry.id] ?? 0,
+      ]),
+    )
+    setAssessmentSyncLoading(true)
+    setAssessmentError(null)
+
+    fetchWordStatuses(
+      visibleEntries.flatMap((entry) => entry.variants),
+      controller.signal,
+    )
+      .then((words) => {
+        const statuses = new Map(
+          words.map((word) => [word.word.toLowerCase().normalize('NFC'), word.status]),
+        )
+
+        setWordAssessments((current) => {
+          const next = { ...current }
+          for (const entry of visibleEntries) {
+            if (
+              pendingAssessmentIdsRef.current.has(entry.id) ||
+              requestedRevisions.get(entry.id) !==
+                (assessmentRevisionsRef.current[entry.id] ?? 0)
+            ) {
+              continue
+            }
+
+            const assessment = assessmentForEntry(entry, statuses)
+            if (assessment) {
+              next[entry.id] = assessment
+            } else {
+              delete next[entry.id]
+            }
+          }
+          return next
+        })
+      })
+      .catch((error: unknown) => {
+        if (!controller.signal.aborted) {
+          setAssessmentError(
+            `Não foi possível carregar as classificações: ${errorMessage(error)}`,
+          )
+        }
+      })
+      .finally(() => {
+        if (!controller.signal.aborted) setAssessmentSyncLoading(false)
+      })
+
+    return () => controller.abort()
+  }, [visibleEntries])
 
   const toggleLengthFilter = (length: number) => {
     setSelectedLengths((current) =>
@@ -230,6 +379,112 @@ export default function Page() {
   }
 
   const clearLengthFilters = () => setSelectedLengths([])
+
+  const handleWordAdded = (word: ApiWord) => {
+    setDictionaryWords((current) =>
+      mergeDictionaryWords(current, [word.word]),
+    )
+    setAddedWordsError(null)
+  }
+
+  const updateWordAssessment = async (
+    wordId: string,
+    assessment: WordAssessment | null,
+  ): Promise<void> => {
+    const entry = dictionaryWords.find((word) => word.id === wordId)
+    if (!entry || pendingAssessmentIdsRef.current.has(wordId)) return
+
+    const previousAssessment = wordAssessments[wordId]
+    const apiStatus = assessmentToApiStatus(assessment)
+    assessmentRevisionsRef.current[wordId] =
+      (assessmentRevisionsRef.current[wordId] ?? 0) + 1
+    pendingAssessmentIdsRef.current.add(wordId)
+    setPendingAssessments((current) => ({ ...current, [wordId]: true }))
+    setAssessmentError(null)
+    setStatusMessage(`Salvando a classificação de ${entry.display}...`)
+    setWordAssessments((current) => {
+      const next = { ...current }
+      if (assessment) {
+        next[wordId] = assessment
+      } else {
+        delete next[wordId]
+      }
+      return next
+    })
+
+    try {
+      const results = await Promise.allSettled(
+        entry.variants.map((variant) => updateWordStatus(variant, apiStatus)),
+      )
+      const failedUpdate = results.find(
+        (result): result is PromiseRejectedResult =>
+          result.status === 'rejected',
+      )
+
+      if (failedUpdate) throw failedUpdate.reason
+
+      const updatedWords = results.map((result) => {
+        if (result.status === 'rejected') throw result.reason
+        return result.value
+      })
+      if (updatedWords.some((word) => word.status !== apiStatus)) {
+        throw new Error('A API não confirmou a classificação solicitada.')
+      }
+
+      setWordAssessments((current) => {
+        const next = { ...current }
+        if (assessment) {
+          next[wordId] = assessment
+        } else {
+          delete next[wordId]
+        }
+        return next
+      })
+      setStatusMessage(`Classificação de ${entry.display} atualizada.`)
+    } catch (error) {
+      let message = errorMessage(error)
+
+      try {
+        const words = await fetchWordStatuses(entry.variants)
+        const statuses = new Map(
+          words.map((word) => [word.word.toLowerCase().normalize('NFC'), word.status]),
+        )
+        const persistedAssessment = assessmentForEntry(entry, statuses)
+
+        setWordAssessments((current) => {
+          const next = { ...current }
+          if (persistedAssessment) {
+            next[wordId] = persistedAssessment
+          } else {
+            delete next[wordId]
+          }
+          return next
+        })
+      } catch (syncError) {
+        message += ` Não foi possível confirmar o estado salvo: ${errorMessage(syncError)}`
+        setWordAssessments((current) => {
+          const next = { ...current }
+          if (previousAssessment) {
+            next[wordId] = previousAssessment
+          } else {
+            delete next[wordId]
+          }
+          return next
+        })
+      }
+
+      setAssessmentError(
+        `Não foi possível salvar a classificação de ${entry.display}: ${message}`,
+      )
+    } finally {
+      pendingAssessmentIdsRef.current.delete(wordId)
+      setPendingAssessments((current) => {
+        const next = { ...current }
+        delete next[wordId]
+        return next
+      })
+    }
+  }
 
   return (
     <main className='min-h-screen bg-[#f8f6f1] text-slate-800 lg:h-dvh lg:overflow-hidden'>
@@ -314,7 +569,29 @@ export default function Page() {
                         ? dictionaryError
                         : canSearch && `Total: ${totalWords} palavras`}
                   </p>
+                  {assessmentSyncLoading && (
+                    <p className='text-xs text-stone-500'>
+                      Sincronizando classificações...
+                    </p>
+                  )}
+                  {assessmentError && (
+                    <p className='text-sm text-rose-700' role='alert'>
+                      {assessmentError}
+                    </p>
+                  )}
+                  {addedWordsError && (
+                    <p className='text-sm text-rose-700' role='alert'>
+                      {addedWordsError}
+                    </p>
+                  )}
                 </div>
+
+                <AddWordForm
+                  existingWords={dictionaryWords}
+                  letters={letters}
+                  requiredLetter={requiredLetter}
+                  onWordAdded={handleWordAdded}
+                />
 
                 {(selectedResults.length > 0 || selectedLengths.length > 0) && (
   <div className='flex flex-col gap-2 text-xs text-stone-600'>
@@ -372,7 +649,12 @@ export default function Page() {
                       {dictionaryError}
                     </div>
                   ) : canSearch ? (
-                    <ResultsList groups={filteredResultGroups} />
+                    <ResultsList
+                      groups={filteredResultGroups}
+                      assessments={wordAssessments}
+                      pendingAssessments={pendingAssessments}
+                      onAssessmentChange={updateWordAssessment}
+                    />
                   ) : (
                     <div className='rounded-xl border border-dashed border-stone-200 bg-stone-50 p-6 text-center text-sm text-stone-500'>
                       Insira as 7 letras do dia para começar.

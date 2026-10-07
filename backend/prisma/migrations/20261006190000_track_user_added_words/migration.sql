@@ -1,0 +1,2 @@
+ALTER TABLE "Word"
+ADD COLUMN "userAdded" BOOLEAN NOT NULL DEFAULT false;

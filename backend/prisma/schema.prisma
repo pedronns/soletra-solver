@@ -1,0 +1,21 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum WordStatus {
+  ACCEPTED
+  REJECTED
+}
+
+model Word {
+  id        Int         @id @default(autoincrement())
+  word      String      @unique
+  status    WordStatus?
+  userAdded Boolean     @default(false)
+  updatedAt DateTime    @updatedAt
+}

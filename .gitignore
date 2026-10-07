@@ -4,3 +4,10 @@ out
 coverage
 npm-debug.log*
 .DS_Store
+.vercel
+.env*
+!.env.example
+!.env.*.example
+*.tsbuildinfo
+backend/dist
+backend/src/generated/prisma

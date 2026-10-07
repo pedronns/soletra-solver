@@ -12,3 +12,5 @@ export interface WordGroup {
   display: string;
   entries: WordEntry[];
 }
+
+export type WordAssessment = 'confirmed' | 'rejected';

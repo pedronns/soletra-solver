@@ -23,6 +23,21 @@ input {
   font: inherit;
 }
 
+.word-assessment-actions {
+  opacity: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .word-assessment-actions {
+    opacity: 0;
+  }
+
+  .word-item:hover .word-assessment-actions,
+  .word-item:focus-within .word-assessment-actions {
+    opacity: 1;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
